@@ -6,5 +6,6 @@ window.settings = {
     botDescription: 'Discord bot template website blends moderation, engagement, and automation into a single easy-to-manage package.',
     theme: 'purple',
     inviteLink: '#',
-    supportServer: '#'
+    supportServer: '#',
+    teamBackdrop: 'assets/team-backdrop.svg'
 };
