@@ -69,7 +69,49 @@ const DEFAULT_SETTINGS = {
     theme: 'purple',
     inviteLink: '#',
     supportServer: '#',
-    teamBackdrop: 'assets/team-backdrop.svg'
+    teamBackdrop: 'assets/team-backdrop.svg',
+    teamMembers: [
+        {
+            name: 'Aria Chen',
+            role: 'Lead Developer',
+            bio: 'Architects {{botName}} and keeps every deployment reliable, fast, and secure.',
+            avatar: 'assets/avatar-aria.svg',
+            links: [
+                { icon: 'fa-brands fa-github', url: '#', label: 'Aria GitHub' },
+                { icon: 'fa-brands fa-x-twitter', url: '#', label: 'Aria Twitter' }
+            ]
+        },
+        {
+            name: 'Diego Marin',
+            role: 'Product Designer',
+            bio: 'Shapes intuitive control panels so every server owner can customise {{botName}} with confidence.',
+            avatar: 'assets/avatar-diego.svg',
+            links: [
+                { icon: 'fa-brands fa-dribbble', url: '#', label: 'Diego Dribbble' },
+                { icon: 'fa-brands fa-behance', url: '#', label: 'Diego Behance' }
+            ]
+        },
+        {
+            name: 'Sana Iqbal',
+            role: 'Community Lead',
+            bio: 'Builds partnerships and channels feedback to keep {{botName}} evolving alongside your members.',
+            avatar: 'assets/avatar-sana.svg',
+            links: [
+                { icon: 'fa-brands fa-discord', url: '#', label: 'Sana Discord' },
+                { icon: 'fa-brands fa-linkedin-in', url: '#', label: 'Sana LinkedIn' }
+            ]
+        },
+        {
+            name: 'Luca Romero',
+            role: 'AI Specialist',
+            bio: 'Develops adaptive automations that let {{botName}} answer questions and moderate conversations proactively.',
+            avatar: 'assets/avatar-luca.svg',
+            links: [
+                { icon: 'fa-brands fa-github', url: '#', label: 'Luca GitHub' },
+                { icon: 'fa-brands fa-medium', url: '#', label: 'Luca Medium' }
+            ]
+        }
+    ]
 };
 
 const STORAGE_KEYS = {
@@ -115,6 +157,7 @@ function initSite() {
     applyTheme(state.settings.theme);
     bindThemeSelector();
     applySettingBindings();
+    renderTeamMembers();
     configureNavigation();
     configureRevealAnimations();
     injectCurrentYear();
@@ -144,6 +187,13 @@ function loadMergedSettings() {
     // Persist current values for use across pages.
     localStorage.setItem(STORAGE_KEYS.name, merged.botName);
     localStorage.setItem(STORAGE_KEYS.theme, merged.theme);
+
+    const userTeam = Array.isArray(userSettings.teamMembers) ? userSettings.teamMembers : null;
+    const baseTeam = userTeam && userTeam.length ? userTeam : DEFAULT_SETTINGS.teamMembers;
+    merged.teamMembers = baseTeam.map(member => ({
+        ...member,
+        links: Array.isArray(member.links) ? member.links.map(link => ({ ...link })) : []
+    }));
 
     return merged;
 }
@@ -229,6 +279,104 @@ function applyTeamBackdrop(backdrop) {
             section.classList.remove('has-backdrop');
             section.style.removeProperty('--team-backdrop-image');
         }
+    });
+}
+
+/**
+ * Builds the team cards for each grid based on settings configuration.
+ */
+function renderTeamMembers() {
+    const grids = document.querySelectorAll('[data-team-grid]');
+    if (!grids.length) {
+        return;
+    }
+
+    const teamMembers = Array.isArray(state.settings.teamMembers) ? state.settings.teamMembers : [];
+
+    grids.forEach(grid => {
+        const variant = grid.dataset.teamGrid || 'compact';
+        grid.innerHTML = '';
+
+        if (!teamMembers.length) {
+            const placeholder = document.createElement('p');
+            placeholder.className = 'team-empty';
+            placeholder.textContent = 'Team information coming soon.';
+            grid.append(placeholder);
+            return;
+        }
+
+        teamMembers.forEach(member => {
+            const card = document.createElement('article');
+            card.className = 'team-card';
+
+            const avatarWrapper = document.createElement('div');
+            avatarWrapper.className = 'avatar';
+
+            if (member.avatar) {
+                const img = document.createElement('img');
+                img.src = member.avatar;
+                img.alt = member.name ? `Portrait of ${member.name}` : 'Team member portrait';
+                avatarWrapper.append(img);
+            } else {
+                const initials = document.createElement('span');
+                initials.className = 'avatar-initial';
+                const firstLetter = (member.name || '?').trim().charAt(0).toUpperCase();
+                initials.textContent = firstLetter || '?';
+                avatarWrapper.append(initials);
+            }
+
+            card.append(avatarWrapper);
+
+            const headingTag = variant === 'expanded' ? 'h2' : 'h3';
+            const nameEl = document.createElement(headingTag);
+            nameEl.textContent = member.name || 'Team Member';
+            card.append(nameEl);
+
+            if (member.role) {
+                const roleEl = document.createElement('p');
+                roleEl.className = 'role';
+                roleEl.textContent = member.role;
+                card.append(roleEl);
+            }
+
+            if (member.bio) {
+                const bioEl = document.createElement('p');
+                bioEl.textContent = member.bio.replace(/{{botName}}/g, state.settings.botName);
+                card.append(bioEl);
+            }
+
+            if (variant === 'expanded' && Array.isArray(member.links) && member.links.length) {
+                const list = document.createElement('ul');
+                list.className = 'team-links';
+
+                member.links.forEach(link => {
+                    if (!link || !link.url) {
+                        return;
+                    }
+
+                    const listItem = document.createElement('li');
+                    const anchor = document.createElement('a');
+                    anchor.href = link.url;
+                    anchor.target = '_blank';
+                    anchor.rel = 'noopener';
+                    anchor.setAttribute('aria-label', link.label || `Open ${member.name || 'team member'} link`);
+
+                    const icon = document.createElement('i');
+                    icon.className = link.icon || 'fa-solid fa-link';
+                    icon.setAttribute('aria-hidden', 'true');
+
+                    anchor.append(icon);
+                    listItem.append(anchor);
+                    list.append(listItem);
+                });
+
+                if (list.children.length) {
+                    card.append(list);
+                }
+            }
+
+            grid.append(card);
+        });
     });
 }
 
