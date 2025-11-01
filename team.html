@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaBot | Team</title>
+    <title>Discord Bot Template</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-7N8V0NQY0SFOxXXIQK5vCk1vZ1tcHTul3e8DqRL3OjaxAg/P6MqxsVXni4eWh05rq6ArtyTcidH8333AdxgV1A==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="style.css">
+    <script defer src="settings.js"></script>
     <script defer src="script.js"></script>
 </head>
 <body data-page="team">
     <header class="site-header">
         <div class="container nav-container">
-            <a class="logo" href="index.html">NovaBot</a>
+            <a class="logo" href="index.html#hero" data-setting="botName">BotName</a>
             <nav class="main-nav" aria-label="Primary">
                 <ul>
-                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="index.html#hero">Home</a></li>
                     <li><a class="nav-link" href="features.html">Features</a></li>
                     <li><a class="nav-link" href="commands.html">Commands</a></li>
                     <li><a class="nav-link" href="team.html">Team</a></li>
+                    <li><a class="nav-link secondary" href="index.html#team">One-page</a></li>
                 </ul>
             </nav>
             <label class="theme-switcher">
-                <span>Theme</span>
+                <span class="theme-label"><i class="fa-solid fa-palette" aria-hidden="true"></i></span>
                 <select id="theme-selector" aria-label="Select color theme">
                     <option value="purple">Purple</option>
                     <option value="void">Void</option>
@@ -34,46 +38,62 @@
     </header>
 
     <main>
-        <section class="page-hero">
+        <section class="page-hero reveal">
             <div class="container page-hero-content">
-                <h1>Meet the crew.</h1>
-                <p>The team crafting NovaBot combines server expertise, design sense, and a love for communities.</p>
+                <h1>The builders of <span data-setting="botName">BotName</span>.</h1>
+                <p>Designers, developers, and community strategists shaping tools with a player-first mindset.</p>
             </div>
         </section>
 
-        <section class="team-section">
-            <div class="container team-grid">
+        <section class="team-section reveal">
+            <div class="container team-grid team-grid--expanded">
                 <article class="team-card">
-                    <div class="avatar" aria-hidden="true">
-                        <img src="https://avatars.dicebear.com/api/identicon/novabot-alpha.svg" alt="Aria Chen avatar">
+                    <div class="avatar">
+                        <img src="assets/avatar-aria.svg" alt="Portrait of Aria Chen">
                     </div>
                     <h2>Aria Chen</h2>
                     <p class="role">Lead Developer</p>
-                    <p>Architects NovaBot's core systems and ensures features are fast, reliable, and secure.</p>
+                    <p>Oversees architecture, builds new systems, and ensures every deployment is reliable.</p>
+                    <ul class="team-links">
+                        <li><a href="#" aria-label="Aria GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+                        <li><a href="#" aria-label="Aria Twitter"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+                    </ul>
                 </article>
                 <article class="team-card">
-                    <div class="avatar" aria-hidden="true">
-                        <img src="https://avatars.dicebear.com/api/identicon/novabot-beta.svg" alt="Diego Marin avatar">
+                    <div class="avatar">
+                        <img src="assets/avatar-diego.svg" alt="Portrait of Diego Marin">
                     </div>
                     <h2>Diego Marin</h2>
                     <p class="role">Product Designer</p>
-                    <p>Designs intuitive experiences that make powerful mod tools approachable for every team.</p>
+                    <p>Shapes the admin experience, prototypes flows, and manages component libraries.</p>
+                    <ul class="team-links">
+                        <li><a href="#" aria-label="Diego Dribbble"><i class="fa-brands fa-dribbble" aria-hidden="true"></i></a></li>
+                        <li><a href="#" aria-label="Diego Behance"><i class="fa-brands fa-behance" aria-hidden="true"></i></a></li>
+                    </ul>
                 </article>
                 <article class="team-card">
-                    <div class="avatar" aria-hidden="true">
-                        <img src="https://avatars.dicebear.com/api/identicon/novabot-gamma.svg" alt="Sana Iqbal avatar">
+                    <div class="avatar">
+                        <img src="assets/avatar-sana.svg" alt="Portrait of Sana Iqbal">
                     </div>
                     <h2>Sana Iqbal</h2>
                     <p class="role">Community Lead</p>
-                    <p>Partners with server owners to gather feedback, test features, and guide the roadmap.</p>
+                    <p>Gathers feedback from partner servers and translates needs into actionable goals.</p>
+                    <ul class="team-links">
+                        <li><a href="#" aria-label="Sana Discord"><i class="fa-brands fa-discord" aria-hidden="true"></i></a></li>
+                        <li><a href="#" aria-label="Sana LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                    </ul>
                 </article>
                 <article class="team-card">
-                    <div class="avatar" aria-hidden="true">
-                        <img src="https://avatars.dicebear.com/api/identicon/novabot-delta.svg" alt="Luca Romero avatar">
+                    <div class="avatar">
+                        <img src="assets/avatar-luca.svg" alt="Portrait of Luca Romero">
                     </div>
                     <h2>Luca Romero</h2>
                     <p class="role">AI Specialist</p>
-                    <p>Builds intelligent automations and keeps NovaBot adapting to every community.</p>
+                    <p>Develops adaptive models for moderation, summarisation, and proactive alerts.</p>
+                    <ul class="team-links">
+                        <li><a href="#" aria-label="Luca GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+                        <li><a href="#" aria-label="Luca Medium"><i class="fa-brands fa-medium" aria-hidden="true"></i></a></li>
+                    </ul>
                 </article>
             </div>
         </section>
@@ -81,12 +101,29 @@
 
     <footer class="site-footer">
         <div class="container footer-content">
-            <p>&copy; <span id="current-year"></span> NovaBot. All rights reserved.</p>
+            <div>
+                <p class="footer-title"><span data-setting="botName">BotName</span></p>
+                <p>&copy; <span id="current-year"></span> <span data-setting="botName">BotName</span>. All rights reserved.</p>
+            </div>
             <div class="footer-links">
-                <a href="#">Invite Bot</a>
-                <a href="https://discord.com" rel="noopener">Discord</a>
+                <a data-setting-link="inviteLink" href="#" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-discord" aria-hidden="true"></i>
+                    Invite
+                </a>
+                <a data-setting-link="supportServer" href="#" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-life-ring" aria-hidden="true"></i>
+                    Support
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    GitHub
+                </a>
             </div>
         </div>
     </footer>
+
+    <button id="back-to-top" type="button" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
 </body>
 </html>

@@ -1,4 +1,4 @@
-// Theme definitions expressed as CSS variable overrides.
+// Theme palettes defined as CSS custom property overrides.
 const themeSettings = {
     purple: {
         '--color-bg': '#160f26',
@@ -62,7 +62,21 @@ const themeSettings = {
     }
 };
 
-// Base command list for commands page.
+const DEFAULT_SETTINGS = {
+    botName: 'NovaBot',
+    botTagline: 'A multipurpose Discord bot template.',
+    botDescription: 'NovaBot blends moderation, engagement, and automation into a single easy-to-manage package.',
+    theme: 'purple',
+    inviteLink: '#',
+    supportServer: '#'
+};
+
+const STORAGE_KEYS = {
+    theme: 'discord-template-theme',
+    name: 'discord-template-name'
+};
+
+// Base command list rendered on both the home and standalone commands page.
 const commands = [
     { name: 'ping', category: 'Utility', usage: '!ping' },
     { name: 'uptime', category: 'Utility', usage: '!uptime' },
@@ -86,11 +100,56 @@ const commands = [
     { name: 'level', category: 'Engagement', usage: '!level [user]' }
 ];
 
-const THEME_STORAGE_KEY = 'novabot-theme';
+const state = {
+    settings: null
+};
+
+document.addEventListener('DOMContentLoaded', initSite);
+
+/**
+ * Bootstraps the template: merges settings, applies theme, hooks UI helpers.
+ */
+function initSite() {
+    state.settings = loadMergedSettings();
+    applyTheme(state.settings.theme);
+    bindThemeSelector();
+    applySettingBindings();
+    configureNavigation();
+    configureRevealAnimations();
+    injectCurrentYear();
+    hydrateCommandsTable();
+    setupBackToTop();
+    updateDocumentTitle();
+}
+
+/**
+ * Merge defaults, user settings, and saved preferences.
+ * @returns {Record<string, string>} resolved settings object.
+ */
+function loadMergedSettings() {
+    const userSettings = window.settings || {};
+    const merged = { ...DEFAULT_SETTINGS, ...userSettings };
+
+    const storedName = localStorage.getItem(STORAGE_KEYS.name);
+    if (!userSettings.botName && storedName) {
+        merged.botName = storedName;
+    }
+
+    const storedTheme = localStorage.getItem(STORAGE_KEYS.theme);
+    if (storedTheme && themeSettings[storedTheme]) {
+        merged.theme = storedTheme;
+    }
+
+    // Persist current values for use across pages.
+    localStorage.setItem(STORAGE_KEYS.name, merged.botName);
+    localStorage.setItem(STORAGE_KEYS.theme, merged.theme);
+
+    return merged;
+}
 
 /**
  * Applies the given theme name by setting CSS custom properties.
- * @param {string} themeName - Key from themeSettings.
+ * @param {string} themeName - key from themeSettings.
  */
 function applyTheme(themeName) {
     const theme = themeSettings[themeName] || themeSettings.purple;
@@ -102,51 +161,181 @@ function applyTheme(themeName) {
 }
 
 /**
- * Populate page elements, attach listeners, and hydrate UI.
+ * Wires up the theme select element to update CSS variables and persist choice.
  */
-function initSite() {
-    const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+function bindThemeSelector() {
     const themeSelector = document.getElementById('theme-selector');
-    const activeTheme = storedTheme && themeSettings[storedTheme] ? storedTheme : 'purple';
+    if (!themeSelector) {
+        return;
+    }
 
-    applyTheme(activeTheme);
-
-    if (themeSelector) {
+    const activeTheme = state.settings.theme;
+    if (themeSettings[activeTheme]) {
         themeSelector.value = activeTheme;
-        themeSelector.addEventListener('change', event => {
-            const nextTheme = event.target.value;
-            applyTheme(nextTheme);
-            localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
-        });
     }
 
-    // Highlight the active navigation item for assistive tech.
-    const currentPage = document.body.dataset.page;
-    if (currentPage) {
-        const pageToHref = {
-            home: 'index.html',
-            features: 'features.html',
-            commands: 'commands.html',
-            team: 'team.html'
-        };
-
-        const activeHref = pageToHref[currentPage];
-
-        document.querySelectorAll('.nav-link').forEach(link => {
-            if (link.getAttribute('href') === activeHref) {
-                link.setAttribute('aria-current', 'page');
-            } else {
-                link.removeAttribute('aria-current');
-            }
-        });
-    }
-
-    injectCurrentYear();
-    hydrateCommandsTable();
+    themeSelector.addEventListener('change', event => {
+        const nextTheme = event.target.value;
+        if (!themeSettings[nextTheme]) {
+            return;
+        }
+        applyTheme(nextTheme);
+        state.settings.theme = nextTheme;
+        localStorage.setItem(STORAGE_KEYS.theme, nextTheme);
+    });
 }
 
 /**
- * Writes the current year into footer spans to keep the site evergreen.
+ * Syncs text and links that reference editable settings.
+ */
+function applySettingBindings() {
+    const { botName, botTagline, botDescription, inviteLink, supportServer } = state.settings;
+
+    document.querySelectorAll('[data-setting="botName"]').forEach(el => {
+        el.textContent = botName;
+    });
+
+    const taglineNodes = document.querySelectorAll('[data-setting="botTagline"]');
+    taglineNodes.forEach(el => {
+        el.textContent = botTagline;
+    });
+
+    document.querySelectorAll('[data-setting="botDescription"]').forEach(el => {
+        el.textContent = botDescription;
+    });
+
+    document.querySelectorAll('[data-setting-link="inviteLink"]').forEach(link => {
+        link.setAttribute('href', inviteLink || '#');
+    });
+
+    document.querySelectorAll('[data-setting-link="supportServer"]').forEach(link => {
+        link.setAttribute('href', supportServer || '#');
+    });
+}
+
+/**
+ * Updates the page title to reflect the bot name and current section.
+ */
+function updateDocumentTitle() {
+    const page = document.body.dataset.page || 'home';
+    const map = {
+        home: 'Home',
+        features: 'Features',
+        commands: 'Commands',
+        team: 'Team'
+    };
+    const suffix = map[page] || 'Home';
+    document.title = `${state.settings.botName} | ${suffix}`;
+}
+
+/**
+ * Adjusts navigation links and highlights the active section/page.
+ */
+function configureNavigation() {
+    const bodyPage = document.body.dataset.page;
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        const anchorHref = link.getAttribute('href');
+        const altHref = link.getAttribute('data-alt-href');
+
+        if (bodyPage === 'home' && anchorHref && anchorHref.startsWith('#')) {
+            // Already points to the section on the same page.
+            return;
+        }
+
+        if (bodyPage !== 'home' && altHref) {
+            link.setAttribute('href', altHref);
+        }
+    });
+
+    if (bodyPage === 'home') {
+        setupSectionHighlighting(navLinks);
+    } else {
+        applyPageHighlight(navLinks, bodyPage);
+    }
+}
+
+/**
+ * Adds IntersectionObserver based highlighting for in-page navigation.
+ * @param {NodeListOf<Element>} navLinks - navigation links to evaluate.
+ */
+function setupSectionHighlighting(navLinks) {
+    const linkMap = new Map();
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            linkMap.set(href.slice(1), link);
+        }
+        link.removeAttribute('aria-current');
+    });
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.target.id) {
+                return;
+            }
+            const link = linkMap.get(entry.target.id);
+            if (!link) {
+                return;
+            }
+            if (entry.isIntersecting) {
+                navLinks.forEach(item => item.removeAttribute('aria-current'));
+                link.setAttribute('aria-current', 'page');
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('section[id]').forEach(section => {
+        observer.observe(section);
+    });
+}
+
+/**
+ * Highlights the active page link when not on the one-page layout.
+ * @param {NodeListOf<Element>} navLinks - navigation links in the header.
+ * @param {string} bodyPage - page identifier from body dataset.
+ */
+function applyPageHighlight(navLinks, bodyPage) {
+    const hrefMap = {
+        features: 'features.html',
+        commands: 'commands.html',
+        team: 'team.html'
+    };
+    const targetHref = hrefMap[bodyPage];
+
+    navLinks.forEach(link => {
+        if (targetHref && link.getAttribute('href') === targetHref) {
+            link.setAttribute('aria-current', 'page');
+        } else {
+            link.removeAttribute('aria-current');
+        }
+    });
+}
+
+/**
+ * Adds a subtle fade-in animation as sections enter the viewport.
+ */
+function configureRevealAnimations() {
+    const revealNodes = document.querySelectorAll('.reveal');
+    if (!revealNodes.length) {
+        return;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    revealNodes.forEach(node => observer.observe(node));
+}
+
+/**
+ * Writes the current year into footer spans.
  */
 function injectCurrentYear() {
     const yearElement = document.getElementById('current-year');
@@ -156,33 +345,42 @@ function injectCurrentYear() {
 }
 
 /**
- * Renders command data and sets up filtering when on the commands page.
+ * Renders command data and sets up filtering and search.
  */
 function hydrateCommandsTable() {
     const tableBody = document.getElementById('command-body');
-    const filterSelect = document.getElementById('command-filter');
-
-    if (!tableBody || !filterSelect) {
+    if (!tableBody) {
         return;
     }
 
-    const categories = Array.from(new Set(commands.map(command => command.category))).sort();
-    categories.forEach(category => {
-        const option = document.createElement('option');
-        option.value = category;
-        option.textContent = category;
-        filterSelect.append(option);
-    });
+    const filterSelect = document.getElementById('command-filter');
+    const searchInput = document.getElementById('command-search');
 
-    /**
-     * Builds table rows that match the selected category.
-     * @param {string} filter - Either "all" or a category name.
-     */
-    const renderRows = filter => {
+    const categories = Array.from(new Set(commands.map(command => command.category))).sort();
+    if (filterSelect && filterSelect.options.length <= 1) {
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            filterSelect.append(option);
+        });
+    }
+
+    const renderRows = () => {
+        const filterValue = filterSelect ? filterSelect.value : 'all';
+        const searchValue = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
         tableBody.innerHTML = '';
 
         commands
-            .filter(command => filter === 'all' || command.category === filter)
+            .filter(command => {
+                const matchesCategory = filterValue === 'all' || command.category === filterValue;
+                const matchesSearch = searchValue.length === 0 ||
+                    command.name.toLowerCase().includes(searchValue) ||
+                    command.usage.toLowerCase().includes(searchValue) ||
+                    command.category.toLowerCase().includes(searchValue);
+                return matchesCategory && matchesSearch;
+            })
             .forEach(command => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -194,11 +392,37 @@ function hydrateCommandsTable() {
             });
     };
 
-    filterSelect.addEventListener('change', event => {
-        renderRows(event.target.value);
-    });
+    if (filterSelect) {
+        filterSelect.addEventListener('change', renderRows);
+    }
 
-    renderRows(filterSelect.value || 'all');
+    if (searchInput) {
+        searchInput.addEventListener('input', renderRows);
+    }
+
+    renderRows();
 }
 
-document.addEventListener('DOMContentLoaded', initSite);
+/**
+ * Shows a back-to-top toggle and scrolls when activated.
+ */
+function setupBackToTop() {
+    const button = document.getElementById('back-to-top');
+    if (!button) {
+        return;
+    }
+
+    const toggleVisibility = () => {
+        if (window.scrollY > 320) {
+            button.classList.add('visible');
+        } else {
+            button.classList.remove('visible');
+        }
+    };
+
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+
+    button.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
