@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Template</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="settings.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body data-page="commands">
+    <header class="site-header">
+        <div class="container nav-container">
+            <a class="logo" href="index.html#hero" data-setting="botName">BotName</a>
+            <nav class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a class="nav-link" href="index.html#hero">Home</a></li>
+                    <li><a class="nav-link" href="features.html">Features</a></li>
+                    <li><a class="nav-link" href="commands.html">Commands</a></li>
+                    <li><a class="nav-link" href="team.html">Team</a></li>
+                    <li><a class="nav-link secondary" href="index.html#commands">One-page</a></li>
+                </ul>
+            </nav>
+            <label class="theme-switcher">
+                <span class="theme-label"><i class="fa-solid fa-palette" aria-hidden="true"></i></span>
+                <select id="theme-selector" class="custom-select" aria-label="Select color theme">
+                    <option value="purple">Purple</option>
+                    <option value="void">Void</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                </select>
+            </label>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero reveal">
+            <div class="container page-hero-content">
+                <h1><span data-setting="botName">BotName</span> command reference.</h1>
+                <p>Filter by category, search keywords, and uncover the right syntax fast.</p>
+            </div>
+        </section>
+
+        <section class="section commands-section reveal">
+            <div class="container commands-card">
+                <div class="commands-toolbar">
+                    <label class="field">
+                        <span class="field-label"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Search</span>
+                        <input type="search" id="command-search" placeholder="Search by name, category, or usage" autocomplete="off">
+                    </label>
+                    <label class="field">
+                        <span class="field-label"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Category</span>
+                        <select id="command-filter" class="custom-select" aria-label="Filter commands by category">
+                            <option value="all">All categories</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="command-table-wrapper">
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Command</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody id="command-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div>
+                <p class="footer-title"><span data-setting="botName">BotName</span></p>
+                <p>&copy; <span id="current-year"></span> <span data-setting="botName">BotName</span>. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a data-setting-link="inviteLink" href="#" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-discord" aria-hidden="true"></i>
+                    Invite
+                </a>
+                <a data-setting-link="supportServer" href="#" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-life-ring" aria-hidden="true"></i>
+                    Support
+                </a>
+                <a href="https://github.com/mutesuffering/Discord-Bot-Website-Template" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" type="button" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+</body>
+</html>

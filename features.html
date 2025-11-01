@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Template</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="settings.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body data-page="features">
+    <header class="site-header">
+        <div class="container nav-container">
+            <a class="logo" href="index.html#hero" data-setting="botName">BotName</a>
+            <nav class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a class="nav-link" href="index.html#hero">Home</a></li>
+                    <li><a class="nav-link" href="features.html">Features</a></li>
+                    <li><a class="nav-link" href="commands.html">Commands</a></li>
+                    <li><a class="nav-link" href="team.html">Team</a></li>
+                    <li><a class="nav-link secondary" href="index.html#features">One-page</a></li>
+                </ul>
+            </nav>
+            <label class="theme-switcher">
+                <span class="theme-label"><i class="fa-solid fa-palette" aria-hidden="true"></i></span>
+                <select id="theme-selector" class="custom-select" aria-label="Select color theme">
+                    <option value="purple">Purple</option>
+                    <option value="void">Void</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                </select>
+            </label>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero reveal">
+            <div class="container page-hero-content">
+                <h1>Explore <span data-setting="botName">BotName</span> features.</h1>
+                <p>Deep dive into the systems that make moderation smoother, communities livelier, and operations smarter.</p>
+            </div>
+        </section>
+
+        <section class="section feature-grid-section reveal">
+            <div class="container feature-grid feature-grid--expanded">
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    </div>
+                    <h2>Predictive Mod Tools</h2>
+                    <p>Auto-moderation pipelines flag issues early, suggest actions, and leave detailed audit trails.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-circle-nodes" aria-hidden="true"></i>
+                    </div>
+                    <h2>Modular Automations</h2>
+                    <p>Mix and match triggers, actions, and delays to suit any workflow from onboarding to event promos.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                    </div>
+                    <h2>Slash Command Builder</h2>
+                    <p>Generate and publish slash commands with validation rules, usage analytics, and role gating.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
+                    </div>
+                    <h2>Engagement Metrics</h2>
+                    <p>Visualise member activity, retention, and message sentiment with exportable reports.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-bell" aria-hidden="true"></i>
+                    </div>
+                    <h2>Smart Notifications</h2>
+                    <p>Notify owners when critical thresholds are met, from queue spikes to moderation backlog.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                    </div>
+                    <h2>Leveling & Rewards</h2>
+                    <p>Gamify participation with XP, ranks, and unlockable perks tailored to your community culture.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-user-lock" aria-hidden="true"></i>
+                    </div>
+                    <h2>Adaptive Onboarding</h2>
+                    <p>Custom questionnaires, verification, and auto-role logic ensure newcomers land in the right spot.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-handshake-angle" aria-hidden="true"></i>
+                    </div>
+                    <h2>Support Desk</h2>
+                    <p>Ticketing flows and auto-responders keep member issues organised and resolved quickly.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                    </div>
+                    <h2>AI Assistants</h2>
+                    <p>Give mods AI-generated summaries, suggestions, and response drafts across channels.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div>
+                <p class="footer-title"><span data-setting="botName">BotName</span></p>
+                <p>&copy; <span id="current-year"></span> <span data-setting="botName">BotName</span>. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a data-setting-link="inviteLink" href="#" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-discord" aria-hidden="true"></i>
+                    Invite
+                </a>
+                <a data-setting-link="supportServer" href="#" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-life-ring" aria-hidden="true"></i>
+                    Support
+                </a>
+                <a href="https://github.com/mutesuffering/Discord-Bot-Website-Template" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" type="button" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+</body>
+</html>

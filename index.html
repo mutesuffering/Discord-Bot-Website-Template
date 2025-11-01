@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Template</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="settings.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body data-page="home">
+    <header class="site-header">
+        <div class="container nav-container">
+            <a class="logo" href="#hero" data-setting="botName" data-alt-href="index.html#hero">BotName</a>
+            <nav class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a class="nav-link" href="#hero" data-alt-href="index.html#hero">Home</a></li>
+                    <li><a class="nav-link" href="#features" data-alt-href="index.html#features">Features</a></li>
+                    <li><a class="nav-link" href="#commands" data-alt-href="index.html#commands">Commands</a></li>
+                    <li><a class="nav-link" href="#team" data-alt-href="index.html#team">Team</a></li>
+                    <li><a class="nav-link secondary" href="features.html" aria-label="Open features page">Full Pages</a></li>
+                </ul>
+            </nav>
+            <label class="theme-switcher">
+                <span class="theme-label"><i class="fa-solid fa-palette" aria-hidden="true"></i></span>
+                <select id="theme-selector" class="custom-select" aria-label="Select color theme">
+                    <option value="purple">Purple</option>
+                    <option value="void">Void</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                </select>
+            </label>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero reveal" id="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <p class="eyebrow"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> Meet <span data-setting="botName">BotName</span></p>
+                    <h1 data-setting="botTagline">A multipurpose Discord bot template.</h1>
+                    <p class="lead" data-setting="botDescription">Your all-in-one Discord companion for moderation, engagement, and automation.</p>
+                    <div class="hero-actions">
+                        <a class="button primary" data-setting-link="inviteLink" href="#" target="_blank" rel="noopener">
+                            <i class="fa-brands fa-discord" aria-hidden="true"></i>
+                            Invite Bot
+                        </a>
+                        <a class="button ghost" href="#features">
+                            <i class="fa-solid fa-cubes" aria-hidden="true"></i>
+                            Explore Features
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="orbital">
+                        <div class="planet"></div>
+                        <div class="ring"></div>
+                        <div class="ring secondary"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section features-section reveal" id="features">
+            <div class="container section-header">
+                <h2>Everything your server needs.</h2>
+                <p>Curated systems that help you moderate, engage, and grow without the busywork.</p>
+            </div>
+            <div class="container feature-grid">
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    </div>
+                    <h3>Adaptive Moderation</h3>
+                    <p>Automated filters and escalation paths keep conversations healthy while surfacing the events that matter.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-robot" aria-hidden="true"></i>
+                    </div>
+                    <h3>Workflow Automations</h3>
+                    <p>Slash commands, triggers, and schedules help you run complex sequences with a single message.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    </div>
+                    <h3>Actionable Insights</h3>
+                    <p>Live dashboards and exportable logs give every moderator the context they need to respond quickly.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-gamepad" aria-hidden="true"></i>
+                    </div>
+                    <h3>Community Perks</h3>
+                    <p>Levels, minigames, and smart responses keep members engaged and encourage new joins.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+                    </div>
+                    <h3>Role Management</h3>
+                    <p>Verification flows, onboarding prompts, and granular permissions remove the friction of managing growth.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="icon-badge">
+                        <i class="fa-solid fa-brain" aria-hidden="true"></i>
+                    </div>
+                    <h3>AI Assistance</h3>
+                    <p>Intelligent replies and automated FAQs lighten the load on staff and keep answers accurate.</p>
+                </article>
+            </div>
+            <div class="container section-footer">
+                <a class="text-link" href="features.html">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                    Open full features page
+                </a>
+            </div>
+        </section>
+
+        <section class="section commands-section reveal" id="commands">
+            <div class="container section-header">
+                <h2>Commands at a glance.</h2>
+                <p>Search and filter to find the command you need in seconds.</p>
+            </div>
+            <div class="container commands-card">
+                <div class="commands-toolbar">
+                    <label class="field">
+                        <span class="field-label"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Search</span>
+                        <input type="search" id="command-search" placeholder="Type to search commands" autocomplete="off">
+                    </label>
+                    <label class="field">
+                        <span class="field-label"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Category</span>
+                        <select id="command-filter" class="custom-select" aria-label="Filter commands by category">
+                            <option value="all">All categories</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="command-table-wrapper">
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Command</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody id="command-body"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="container section-footer">
+                <a class="text-link" href="commands.html">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                    Open full commands page
+                </a>
+            </div>
+        </section>
+
+        <section class="section team-section reveal" id="team" data-team-section>
+            <div class="container section-header">
+                <h2>The team behind <span data-setting="botName">BotName</span>.</h2>
+                <p>A multidisciplinary crew building tools that empower community leaders everywhere.</p>
+            </div>
+            <div class="container team-grid" data-team-grid="compact"></div>
+            <div class="container section-footer">
+                <a class="text-link" href="team.html">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                    Meet the full team
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div>
+                <p class="footer-title"><span data-setting="botName">BotName</span></p>
+                <p>&copy; <span id="current-year"></span> <span data-setting="botName">BotName</span>. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a data-setting-link="inviteLink" href="#" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-discord" aria-hidden="true"></i>
+                    Invite
+                </a>
+                <a data-setting-link="supportServer" href="#" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-life-ring" aria-hidden="true"></i>
+                    Support
+                </a>
+                <a href="https://github.com/mutesuffering/Discord-Bot-Website-Template" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <button id="back-to-top" type="button" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+</body>
+</html>
