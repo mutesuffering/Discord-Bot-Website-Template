@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaBot | Commands</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body data-page="commands">
+    <header class="site-header">
+        <div class="container nav-container">
+            <a class="logo" href="index.html">NovaBot</a>
+            <nav class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="features.html">Features</a></li>
+                    <li><a class="nav-link" href="commands.html">Commands</a></li>
+                    <li><a class="nav-link" href="team.html">Team</a></li>
+                </ul>
+            </nav>
+            <label class="theme-switcher">
+                <span>Theme</span>
+                <select id="theme-selector" aria-label="Select color theme">
+                    <option value="purple">Purple</option>
+                    <option value="void">Void</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                </select>
+            </label>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container page-hero-content">
+                <h1>Command Reference</h1>
+                <p>Browse the latest NovaBot commands and filter by category for quick access.</p>
+            </div>
+        </section>
+
+        <section class="commands-section">
+            <div class="container">
+                <div class="command-toolbar">
+                    <label for="command-filter">Filter by category</label>
+                    <select id="command-filter">
+                        <option value="all">All Categories</option>
+                    </select>
+                </div>
+                <div class="command-table-wrapper">
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Command</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody id="command-body">
+                            <!-- Commands will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>&copy; <span id="current-year"></span> NovaBot. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Invite Bot</a>
+                <a href="https://discord.com" rel="noopener">Discord</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

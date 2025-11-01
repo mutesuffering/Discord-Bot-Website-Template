@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaBot | Home</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body data-page="home">
+    <header class="site-header">
+        <div class="container nav-container">
+            <a class="logo" href="index.html">NovaBot</a>
+            <nav class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="features.html">Features</a></li>
+                    <li><a class="nav-link" href="commands.html">Commands</a></li>
+                    <li><a class="nav-link" href="team.html">Team</a></li>
+                </ul>
+            </nav>
+            <label class="theme-switcher">
+                <span>Theme</span>
+                <select id="theme-selector" aria-label="Select color theme">
+                    <option value="purple">Purple</option>
+                    <option value="void">Void</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                </select>
+            </label>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>Meet NovaBot</h1>
+                    <p>Your all-in-one Discord companion for moderation, engagement, and automation.</p>
+                    <div class="hero-actions">
+                        <a class="button primary" href="#">Invite Bot</a>
+                        <a class="button ghost" href="features.html">See Features</a>
+                    </div>
+                </div>
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="orbital">
+                        <div class="planet"></div>
+                        <div class="ring"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="highlights">
+            <div class="container grid">
+                <article class="highlight">
+                    <h2>Smarter Moderation</h2>
+                    <p>Advanced rule sets keep your community safe, while automation tools minimize manual work.</p>
+                </article>
+                <article class="highlight">
+                    <h2>Community Engagement</h2>
+                    <p>Interactive games, leveling, and custom responses make every server feel alive.</p>
+                </article>
+                <article class="highlight">
+                    <h2>Actionable Insights</h2>
+                    <p>Realtime dashboards and audit logs show exactly what is happening in your server.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container cta-card">
+                <h2>Power up your Discord server today.</h2>
+                <p>Invite NovaBot and unlock a suite of tools that evolve with your community.</p>
+                <a class="button primary" href="#">Invite NovaBot</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>&copy; <span id="current-year"></span> NovaBot. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Invite Bot</a>
+                <a href="https://discord.com" rel="noopener">Discord</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

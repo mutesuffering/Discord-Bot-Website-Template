@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaBot | Team</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body data-page="team">
+    <header class="site-header">
+        <div class="container nav-container">
+            <a class="logo" href="index.html">NovaBot</a>
+            <nav class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="features.html">Features</a></li>
+                    <li><a class="nav-link" href="commands.html">Commands</a></li>
+                    <li><a class="nav-link" href="team.html">Team</a></li>
+                </ul>
+            </nav>
+            <label class="theme-switcher">
+                <span>Theme</span>
+                <select id="theme-selector" aria-label="Select color theme">
+                    <option value="purple">Purple</option>
+                    <option value="void">Void</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                </select>
+            </label>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container page-hero-content">
+                <h1>Meet the crew.</h1>
+                <p>The team crafting NovaBot combines server expertise, design sense, and a love for communities.</p>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <div class="container team-grid">
+                <article class="team-card">
+                    <div class="avatar" aria-hidden="true">
+                        <img src="https://avatars.dicebear.com/api/identicon/novabot-alpha.svg" alt="Aria Chen avatar">
+                    </div>
+                    <h2>Aria Chen</h2>
+                    <p class="role">Lead Developer</p>
+                    <p>Architects NovaBot's core systems and ensures features are fast, reliable, and secure.</p>
+                </article>
+                <article class="team-card">
+                    <div class="avatar" aria-hidden="true">
+                        <img src="https://avatars.dicebear.com/api/identicon/novabot-beta.svg" alt="Diego Marin avatar">
+                    </div>
+                    <h2>Diego Marin</h2>
+                    <p class="role">Product Designer</p>
+                    <p>Designs intuitive experiences that make powerful mod tools approachable for every team.</p>
+                </article>
+                <article class="team-card">
+                    <div class="avatar" aria-hidden="true">
+                        <img src="https://avatars.dicebear.com/api/identicon/novabot-gamma.svg" alt="Sana Iqbal avatar">
+                    </div>
+                    <h2>Sana Iqbal</h2>
+                    <p class="role">Community Lead</p>
+                    <p>Partners with server owners to gather feedback, test features, and guide the roadmap.</p>
+                </article>
+                <article class="team-card">
+                    <div class="avatar" aria-hidden="true">
+                        <img src="https://avatars.dicebear.com/api/identicon/novabot-delta.svg" alt="Luca Romero avatar">
+                    </div>
+                    <h2>Luca Romero</h2>
+                    <p class="role">AI Specialist</p>
+                    <p>Builds intelligent automations and keeps NovaBot adapting to every community.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>&copy; <span id="current-year"></span> NovaBot. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Invite Bot</a>
+                <a href="https://discord.com" rel="noopener">Discord</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
