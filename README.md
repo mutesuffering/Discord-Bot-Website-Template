@@ -102,6 +102,10 @@ const settings = {
 
 Created with love for the Discord bot community. If you find this template useful, please **⭐ star this repo** and check out 👉 [Discord.JS v14 Handler by AmtiXDev](https://github.com/mutesuffering/Discord.JS-v14-Handler) — a fantastic command handler project that pairs perfectly with this site.
 
+For any issues or inquiries, feel free to reach out on our Discord server:
+
+[![Discord Banner](https://api.weblutions.com/discord/invite/fDkjPNN6sP/)](https://discord.gg/fDkjPNN6sP)
+
 ---
 
 ## 📜 License
