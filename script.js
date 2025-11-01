@@ -68,7 +68,8 @@ const DEFAULT_SETTINGS = {
     botDescription: 'NovaBot blends moderation, engagement, and automation into a single easy-to-manage package.',
     theme: 'purple',
     inviteLink: '#',
-    supportServer: '#'
+    supportServer: '#',
+    teamBackdrop: 'assets/team-backdrop.svg'
 };
 
 const STORAGE_KEYS = {
@@ -189,7 +190,7 @@ function bindThemeSelector() {
  * Syncs text and links that reference editable settings.
  */
 function applySettingBindings() {
-    const { botName, botTagline, botDescription, inviteLink, supportServer } = state.settings;
+    const { botName, botTagline, botDescription, inviteLink, supportServer, teamBackdrop } = state.settings;
 
     document.querySelectorAll('[data-setting="botName"]').forEach(el => {
         el.textContent = botName;
@@ -210,6 +211,24 @@ function applySettingBindings() {
 
     document.querySelectorAll('[data-setting-link="supportServer"]').forEach(link => {
         link.setAttribute('href', supportServer || '#');
+    });
+
+    applyTeamBackdrop(teamBackdrop);
+}
+
+/**
+ * Applies the configured backdrop image to team sections if available.
+ * @param {string} backdrop - path or URL to the backdrop asset.
+ */
+function applyTeamBackdrop(backdrop) {
+    document.querySelectorAll('[data-team-section]').forEach(section => {
+        if (backdrop) {
+            section.classList.add('has-backdrop');
+            section.style.setProperty('--team-backdrop-image', `url("${backdrop}")`);
+        } else {
+            section.classList.remove('has-backdrop');
+            section.style.removeProperty('--team-backdrop-image');
+        }
     });
 }
 
